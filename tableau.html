@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord Moderne</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+        }
+
+        .main-navbar {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 2rem;
+        }
+
+        .sub-navbar {
+            background-color: #f1f3f5;
+            padding: 0.5rem 2rem;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--dark-color);
+            margin-left: 1rem;
+        }
+
+        .controls {
+            background-color: white;
+            border-right: 1px solid #dee2e6;
+            height: calc(100vh - 100px);
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .map-area {
+            background-color: white;
+            height: calc(100vh - 100px);
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .table-section {
+            background-color: white;
+            border-top: 1px solid #dee2e6;
+            padding: 2rem;
+        }
+
+        .form-check-label {
+            margin-left: 0.5rem;
+        }
+
+        .btn-custom {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            margin-top: 1rem;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+        }
+
+        .btn-custom:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .dropdown-menu {
+            width: 100%;
+        }
+
+        .form-control {
+            margin-bottom: 1rem;
+        }
+
+        .form-select {
+            margin-bottom: 1rem;
+        }
+
+        .card {
+            margin-bottom: 1rem;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: white;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        
+
+    </style>
+</head>
+<body>
+    <!-- Barre de navigation principale -->
+    <nav class="navbar navbar-expand-lg navbar-light main-navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Logo</a>
+            <div class="d-flex">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-bell"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-user"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sous-barres de navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sub-navbar">
+        <div class="container-fluid">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Contrôles</a>
+                </li>
+                 <li class="nav-item">
+                <a class="nav-link text-primary fw-bold" href="#">Tableau de Bord</a>
+            </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Import</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sélection</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Augmenter la taille des contrôles -->
+            <div class="col-md-4 p-4">
+                <h2>Statistiques</h2>
+
+                <!-- Graphique camembert -->
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Répartition par type de géométrie
+                    </div>
+                    <div class="card-body p-2" >
+              <canvas id="geometryPieChart" width="280" height="180" style="display: block; width: 280px; height: 180px;"></canvas>
+            </div>
+
+                </div>
+
+                <!-- Graphique barres -->
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Éléments par section
+                    </div>
+                    <div class="card-body p-2">
+                        <canvas id="sectionBarChart" width="200" height="100"></canvas>
+                    </div>
+                </div>
+
+                <!-- Graphique ligne -->
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Évolution des imports
+                    </div>
+                    <div class="card-body p-2">
+                        <canvas id="importsLineChart" width="280" height="100"></canvas>
+                    </div>
+                </div>
+</div>
+
+
+            <!-- Réduire la taille de la carte -->
+            <div class="col-md-8 map-area p-4">
+                <!-- Zone de la carte -->
+                <p>Zone de la Carte</p>
+            </div>
+        </div>
+
+
+        
+        <div class="table-section p-4">
+            <h2>Tableau des Éléments</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Type</th>
+                        <th>Coordonnées</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Élément 1</td>
+                        <td>Point</td>
+                        <td>(0, 0)</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Élément 2</td>
+                        <td>Ligne</td>
+                        <td>(1, 1)</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Élément 3</td>
+                        <td>Polygone</td>
+                        <td>(2, 2)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // 📊 Camembert
+        new Chart(document.getElementById('geometryPieChart'), {
+            type: 'pie',
+            data: {
+                labels: ['Points', 'Lignes', 'Polygones', 'MultiPolygones'],
+                datasets: [{
+                    data: [12, 7, 10, 3],
+                    backgroundColor: ['#4361ee', '#4895ef', '#4cc9f0', '#3f37c9'],
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: false,          // Désactive la mise à l’échelle automatique
+                maintainAspectRatio: false // Ne pas maintenir le ratio automatique
+            }
+        });
+
+
+        // 📊 Barres
+        new Chart(document.getElementById('sectionBarChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Section A', 'Section B', 'Section C'],
+                datasets: [{
+                    label: 'Éléments',
+                    data: [14, 8, 6],
+                    backgroundColor: '#4895ef'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // 📈 Courbe
+        new Chart(document.getElementById('importsLineChart'), {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai'],
+                datasets: [{
+                    label: 'Imports',
+                    data: [2, 4, 1, 7, 5],
+                    borderColor: '#4361ee',
+                    backgroundColor: 'rgba(67, 97, 238, 0.2)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

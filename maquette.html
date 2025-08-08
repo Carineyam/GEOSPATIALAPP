@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord Moderne</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+        }
+
+        .main-navbar {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 2rem;
+        }
+
+        .sub-navbar {
+            background-color: #f1f3f5;
+            padding: 0.5rem 2rem;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--dark-color);
+            margin-left: 1rem;
+        }
+
+        .controls {
+            background-color: white;
+            border-right: 1px solid #dee2e6;
+            height: calc(100vh - 100px);
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .map-area {
+            background-color: white;
+            height: calc(100vh - 100px);
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .table-section {
+            background-color: white;
+            border-top: 1px solid #dee2e6;
+            padding: 2rem;
+        }
+
+        .form-check-label {
+            margin-left: 0.5rem;
+        }
+
+        .btn-custom {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            margin-top: 1rem;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+        }
+
+        .btn-custom:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .dropdown-menu {
+            width: 100%;
+        }
+
+        .form-control {
+            margin-bottom: 1rem;
+        }
+
+        .form-select {
+            margin-bottom: 1rem;
+        }
+
+        .card {
+            margin-bottom: 1rem;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: white;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barre de navigation principale -->
+    <nav class="navbar navbar-expand-lg navbar-light main-navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Logo</a>
+            <div class="d-flex">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-bell"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-user"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sous-barres de navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sub-navbar">
+        <div class="container-fluid">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link active text-primary fw-bold" aria-current="page" href="#">Contrôles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Tableau de Bord</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Import</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sélection</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Augmenter la taille des contrôles -->
+            <div class="col-md-4 controls p-4">
+                <h2>Contrôles</h2>
+                  <div class="mb-3">
+                       <label class="form-label">Filtrer par type :</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input filter-type" type="checkbox" id="filter-point" value="ST_Point">
+                            <label class="form-check-label" for="filter-point">Points</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input filter-type" type="checkbox" id="filter-line" value="ST_LineString">
+                            <label class="form-check-label" for="filter-line">Lignes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input filter-type" type="checkbox" id="filter-polygon" value="ST_Polygon">
+                            <label class="form-check-label" for="filter-polygon">Polygones</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input filter-type" type="checkbox" id="filter-multipolygon" value="ST_MultiPolygon">
+                            <label class="form-check-label" for="filter-multipolygon">MultiPolygon</label>
+                        </div>
+
+
+                    </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Modifier un élément existant</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="feature-select" class="form-label">Élément à modifier :</label>
+                            <select id="feature-select" class="form-select">
+                                <option value="">-- Veuillez sélectionner --</option>
+                            </select>
+                        </div>
+
+                       
+                        <div class="mb-3">
+                                <label for="feature-name" class="form-label">Nom de l'élément :</label>
+                                <input type="text" id="feature-name" class="form-control" placeholder="Entrez le nouveau nom" disabled>
+                            </div>
+
+                            <!-- Coordonnées pour les points -->
+                            <div class="mb-3" id="point-coords-container" style="display: none;">
+                                <label class="form-label">Coordonnées du point :</label>
+                                <div id="point-coords" class="form-control bg-light text-muted">Non sélectionné</div>
+                            </div>
+                            
+                            <button id="edit-geometry-btn" class="btn btn-warning mt-2" style="display:none;">
+                                <i class="fas fa-edit"></i> Modifier la forme
+                            </button>
+                            
+                        
+
+                            <!-- Bouton de sauvegarde -->
+                            <button id="save-feature-btn" class="btn btn-success w-100" disabled>
+                                <i class="fa fa-save me-2"></i>Enregistrer les modifications
+                            </button>
+
+                            <!-- Message de statut -->
+                            <div id="save-status" class="mt-3 text-center text-info"></div>
+                        </div>
+
+                    </div>
+                
+                <div class="card">
+                        <label for="location-select" class="form-label">Recherchez un lieu :</label>
+
+                        <!-- ✅ Groupe de filtres pour le tableau -->
+                        <div id="table-filters" class="mb-2">
+                            <label><input type="checkbox" class="filter-table" value="ST_Point"> Point</label>
+                            <label><input type="checkbox" class="filter-table" value="ST_LineString"> Ligne</label>
+                            <label><input type="checkbox" class="filter-table" value="ST_Polygon"> Polygone</label>
+                            <label><input type="checkbox" class="filter-table" value="ST_MultiPolygon"> MultiPolygone</label>
+                        </div>
+
+                        <!-- Barre de recherche (Select2 ou autre) -->
+                        <div id="search-bar-container" style="display: none;">
+                            <select id="location-select" class="form-select" style="width: 100%"></select>
+                        </div>
+
+                        <!-- 🔄 Bouton de réinitialisation -->
+                        <button id="reset-map" class="btn btn-secondary w-100 mt-3">Réinitialiser la carte</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Rechercher un lieu</h5>
+                        </div>
+                        <div class="card-body">
+                            <input type="text" class="form-control" placeholder="Chercher un lieu...">
+                        </div>
+                    </div>
+                    <button class="btn btn-custom w-100">Réinitialiser carte</button>
+                    
+                </div>
+            <!-- Réduire la taille de la carte -->
+            <div class="col-md-8 map-area p-4">
+                <!-- Zone de la carte -->
+                <div id="map" class="map-container"></div>
+            </div>
+        </div>
+
+
+        
+        <div class="table-section p-4">
+            <h2>Tableau des Éléments</h2>
+           <div id="geometry-table-container" style="display: none;">
+                        <table id="geometry-table" class="table">
+                        <thead>
+                            <tr>
+                            <th data-sort="nom">Nom</th>
+                            <th data-sort="type">Type</th>
+                            <th>Section</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        </table>
+                    </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
