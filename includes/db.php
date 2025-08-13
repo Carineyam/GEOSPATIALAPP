@@ -6,6 +6,7 @@ function connectDB() {
     $db_url = getenv("DATABASE_URL");
 
     if ($db_url) {
+        // Render ou autre cloud (base auto-configurée)
         $parts = parse_url($db_url);
         $host = $parts['host'];
         $port = $parts['port'];
@@ -13,8 +14,9 @@ function connectDB() {
         $pass = $parts['pass'];
         $dbname = ltrim($parts['path'], '/');
     } else {
+        // Environnement local
         $host = "localhost";
-        $port = "5433";
+        $port = "5433"; // ✅ ton port local correct
         $dbname = "geodb";
         $user = "postgres";
         $pass = "root";
@@ -24,13 +26,13 @@ function connectDB() {
     $conn = pg_connect($conn_string);
 
     if (!$conn) {
-        error_log("Connexion échouée : " . pg_last_error());
+        // 🔒 NE PAS appeler pg_last_error() ici si $conn === false
+        error_log("❌ Connexion échouée à PostgreSQL (vérifie host, port, user, mdp).");
         return false;
     }
 
     return $conn;
 }
-
 /***************************** */
 /*
 function connectDB() {
