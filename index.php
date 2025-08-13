@@ -1,7 +1,26 @@
 <?php
 include('includes/db.php');
-
 $conn = connectDB();
+if (!$conn) {
+    die("Erreur de connexion");
+}
+
+// Exemple simple
+$result = pg_query($conn, "SELECT * FROM golfe LIMIT 5;");
+$data = pg_fetch_all($result);
+
+echo "<pre>";
+print_r($data);
+echo "</pre>";
+
+pg_close($conn);
+
+
+
+
+/************************************ */
+
+/*$conn = connectDB();
 $sort = $_POST['sort'] ?? 'asc';
 
 $query = "
@@ -18,7 +37,7 @@ $query = "
 
 $result = pg_query($conn, $query) or die("Erreur lors de la requête : " . pg_last_error());
 $lieux = pg_fetch_all($result) ?: [];
-pg_close($conn);
+pg_close($conn);*/
 ?>
 
 <!DOCTYPE html>

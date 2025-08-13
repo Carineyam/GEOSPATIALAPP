@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: mon-app-php
+    env: docker
+    branch: main
+    plan: free
+    region: frankfurt
+    autoDeploy: true
+
+databases:
+  - name: postgres-golfe
+    plan: free
+    databaseName: phpdb
+    user: phpuser
