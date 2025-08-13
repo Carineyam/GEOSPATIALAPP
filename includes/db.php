@@ -16,7 +16,7 @@ function connectDB() {
     } else {
         // Environnement local
         $host = "localhost";
-        $port = "5433"; // ✅ ton port local correct
+        $port = "5432"; // ✅ ton port local correct
         $dbname = "geodb";
         $user = "postgres";
         $pass = "root";
