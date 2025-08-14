@@ -841,7 +841,7 @@ th {
 window.lieuxData = <?= json_encode($lieux) ?>;
 
 </script>
-<script src="https://unpkg.com/leaflet/dist/leaflet.js">
+<script defer src="https://unpkg.com/leaflet/dist/leaflet.js">
    
 
 </script>
