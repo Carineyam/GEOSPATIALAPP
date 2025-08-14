@@ -847,56 +847,37 @@ th {
 window.lieuxData = <?= json_encode($lieux) ?>;
 
 </script>
-<script src="https://unpkg.com/leaflet/dist/leaflet.js">
-   
+<!-- Leaflet et plugins -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-draw@1.0.4/dist/leaflet.draw.css" />
 
-</script>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet-editable@1.2.0/src/Leaflet.Editable.js"></script>
-<!-- À la fin du body -->
-<script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<!-- Ajoutez ces scripts dans votre head -->
- <!-- 1. Librairie JSZip version 2.6.1 (compatible avec shpwrite) -->
-<!-- Dans le <head> ou avant votre script principal -->
-<!-- Dans l'en-tête -->
-<script src="https://cdn.jsdelivr.net/npm/@mapbox/togeojson@0.16.2/togeojson.min.js"></script>
 
-<script src="
-https://cdn.jsdelivr.net/npm/shp-write-update@2.0.1/shpwrite.min.js
-"></script>
+<!-- Turf, GeoTIFF et autres librairies -->
+<script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/geotiff@2.0.4/dist-browser/geotiff.browser.min.js"></script>
+<script src="https://unpkg.com/georaster-layer-for-leaflet/dist/georaster-layer-for-leaflet.min.js"></script>
+
+<!-- shp, KML, Excel -->
+<script src="https://cdn.jsdelivr.net/npm/@mapbox/togeojson@0.16.2/togeojson.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/shp-write-update@2.0.1/shpwrite.min.js"></script>
 <script src="https://unpkg.com/shpjs@latest/dist/shp.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tokml/tokml.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<!-- Ajoute SheetJS et togeojson pour le support Excel et KML -->
 
-
-
-<!-- Dans le <head> ou avant votre script principal -->
+<!-- UI -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script>
-
-
-
-
-</script>
+<!-- Graphiques -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <script src="https://d3js.org/d3.v7.min.js"></script>
 
-
-<!-- GeoTIFF support -->
-<script src="https://cdn.jsdelivr.net/npm/geotiff@2.0.4/dist-browser/geotiff.browser.min.js"></script>
-
-
-<script src="https://unpkg.com/georaster-layer-for-leaflet/dist/georaster-layer-for-leaflet.min.js"></script>
-
-
+<!-- Votre script principal -->
 <script src="js/map.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
