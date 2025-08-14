@@ -848,11 +848,10 @@ window.lieuxData = <?= json_encode($lieux) ?>;
 
 </script>
 <!-- Leaflet et plugins -->
-<!-- CSS Leaflet local -->
-<link rel="stylesheet" href="/leaflet/leaflet.css" />
+
 
 <!-- JS Leaflet local -->
-<script src="/leaflet/leaflet.js"></script>
+<script defer src="/leaflet/leaflet.js"></script>
 
 
 
