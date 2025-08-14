@@ -13,14 +13,7 @@ function connectDB() {
         $user = $parts['user'];
         $pass = $parts['pass'];
         $dbname = ltrim($parts['path'], '/');
-    } else {
-        // Environnement local
-        $host = "localhost";
-        $port = "5432"; // ✅ ton port local correct
-        $dbname = "geodb";
-        $user = "postgres";
-        $pass = "root";
-    }
+    } 
 
     $conn_string = "host=$host port=$port dbname=$dbname user=$user password=$pass";
     $conn = pg_connect($conn_string);
