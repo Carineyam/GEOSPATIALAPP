@@ -46,7 +46,7 @@ pg_close($conn);*/
     
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="/leaflet/leaflet.css" />
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     <!-- Leaflet Draw pour dessiner une zone -->
@@ -848,10 +848,16 @@ window.lieuxData = <?= json_encode($lieux) ?>;
 
 </script>
 <!-- Leaflet et plugins -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<!-- CSS Leaflet local -->
+<link rel="stylesheet" href="/leaflet/leaflet.css" />
+
+<!-- JS Leaflet local -->
+<script src="/leaflet/leaflet.js"></script>
+
+
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-draw@1.0.4/dist/leaflet.draw.css" />
 
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet-editable@1.2.0/src/Leaflet.Editable.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
 
