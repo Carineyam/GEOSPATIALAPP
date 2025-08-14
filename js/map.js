@@ -293,58 +293,47 @@ function createEditablePopup(lieu) {
 
 //*******************************************************************iframe video et ajout des couches ************************************************ */
 
-const mapContainer = document.getElementById('map'); // ✅ Nom sans conflit
+// Références globales aux éléments HTML
+const mapContainer = document.getElementById('map');
+const mapVideoContainer = document.getElementById('map-video-container');
+const videoContainer = document.getElementById('video-container');
+const videoIframe = document.getElementById('video-iframe');
 
-const container = document.getElementById('map-video-container');
-const video = document.getElementById('video-container');
+// --- Gestion de la vidéo ---
+function visualiserVideo(url) {
+    if (!mapContainer || !mapVideoContainer || !videoContainer || !videoIframe) {
+        console.error('Un ou plusieurs éléments HTML sont introuvables.');
+        return;
+    }
 
+    videoIframe.src = url;
+    mapVideoContainer.style.display = 'flex';
+    videoContainer.style.display = 'block';
 
-
-  function visualiserVideo(url) {
-  const mapContainer = document.getElementById('map');
-  const container = document.getElementById('map-video-container');
-  const video = document.getElementById('video-container');
-  const iframe = document.getElementById('video-iframe');
-
-  if (!mapContainer || !container || !video || !iframe) {
-    console.error('Un ou plusieurs éléments HTML sont introuvables.');
-    return;
-  }
-
-  container.style.display = 'flex';
-  video.style.display = 'block';
-  iframe.src = url;
-
-  // Réduit la hauteur de la carte à 50%
-  mapContainer.style.flex = '0 0 50%';
+    // Réduire la carte à 50% de hauteur
+    mapContainer.style.flex = '0 0 50%';
 }
-
-
 
 function fermerVideo() {
-  const mapContainer = document.getElementById('map');
-  const container = document.getElementById('map-video-container');
-  const video = document.getElementById('video-container');
-  const iframe = document.getElementById('video-iframe');
+    if (!mapContainer || !mapVideoContainer || !videoContainer || !videoIframe) return;
 
-  if (!mapContainer || !container || !video || !iframe) return;
+    videoIframe.src = '';
+    mapVideoContainer.style.display = 'none';
+    videoContainer.style.display = 'none';
 
-  container.style.display = 'none';
-  video.style.display = 'none';
-  iframe.src = '';
-
-  // Rétablir la carte à sa taille normale
-  mapContainer.style.flex = '1';
+    // Rétablir la carte à sa taille normale
+    mapContainer.style.flex = '1';
 }
 
+// Exemple: bouton de fermeture
+const closeVideoBtn = document.getElementById('close-video-btn');
+if (closeVideoBtn) closeVideoBtn.addEventListener('click', fermerVideo);
 
-
- function toggleLayer(layer, shouldAdd) {
-    if (shouldAdd) {
-        map.addLayer(layer);
-    } else {
-        map.removeLayer(layer);
-    }
+// --- Gestion des couches Leaflet ---
+function toggleLayer(layer, shouldAdd) {
+    if (!map || !layer) return;
+    if (shouldAdd) map.addLayer(layer);
+    else map.removeLayer(layer);
 }
 
 const layerMap = {
@@ -355,34 +344,18 @@ const layerMap = {
 };
 
 // Gestion des checkboxes "Ajouter les couches"
-document.querySelectorAll('.layer-option-add').forEach(checkbox => {
-    checkbox.addEventListener('change', function () {
-        const layerType = this.value;
-        const layer = layerMap[layerType];
-
-        if (layer) {
-            if (this.checked) {
-                map.addLayer(layer);
-            } else {
-                map.removeLayer(layer);
-            }
-        }
+document.querySelectorAll('.layer-option-add').forEach(cb => {
+    cb.addEventListener('change', () => {
+        const layer = layerMap[cb.value];
+        if (layer) toggleLayer(layer, cb.checked);
     });
 });
 
 // Gestion des checkboxes "Enlever les couches"
-document.querySelectorAll('.layer-option-remove').forEach(checkbox => {
-    checkbox.addEventListener('change', function () {
-        const layerType = this.value;
-        const layer = layerMap[layerType];
-
-        if (layer) {
-            if (this.checked) {
-                map.removeLayer(layer);
-            } else {
-                map.addLayer(layer);
-            }
-        }
+document.querySelectorAll('.layer-option-remove').forEach(cb => {
+    cb.addEventListener('change', () => {
+        const layer = layerMap[cb.value];
+        if (layer) toggleLayer(layer, !cb.checked);
     });
 });
 

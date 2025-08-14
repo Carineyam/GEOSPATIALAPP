@@ -796,19 +796,23 @@ th {
 
     <!-- Colonne droite : carte toujours visible -->
       <div class="col-md-8 map-area p-4">
-          <div class="map-video-wrapper" style="height: 100%; display: flex; flex-direction: column;">
-            <div id="map" class="map-container" style="flex: 1;"></div>
+        <div class="map-video-wrapper" style="height: 100%; display: flex; flex-direction: column;">
+          
+          <!-- Carte -->
+          <div id="map" class="map-container" style="flex: 1;"></div>
 
-            <div id="map-video-container" style="display: none; flex-direction: column;">
-              <div id="video-container" style="padding: 10px; border-top: 1px solid #ccc; display: none;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                  <h4>Vidéo</h4>
-                  <button onclick="fermerVideo()" style="margin-left: auto;">✖</button>
-                </div>
-                <iframe id="video-iframe" width="100%" height="300" src="" frameborder="0" allowfullscreen></iframe>
+          <!-- Container vidéo, caché par défaut -->
+          <div id="map-video-container" style="display: none; flex-direction: column;">
+            <div id="video-container" style="padding: 10px; border-top: 1px solid #ccc;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h4>Vidéo</h4>
+                <button id="close-video-btn" style="margin-left: auto;">✖</button>
               </div>
+              <iframe id="video-iframe" width="100%" height="300" src="" frameborder="0" allowfullscreen></iframe>
             </div>
           </div>
+
+        </div>
       </div>
 
 
@@ -841,7 +845,7 @@ th {
 window.lieuxData = <?= json_encode($lieux) ?>;
 
 </script>
-<script defer src="https://unpkg.com/leaflet/dist/leaflet.js">
+<script src="https://unpkg.com/leaflet/dist/leaflet.js">
    
 
 </script>
