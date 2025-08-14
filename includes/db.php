@@ -12,13 +12,13 @@ function connectDB() {
     // Parse l'URL
     $dbopts = parse_url($db_url);
 
+    $conn_string = "host=$host port=$port dbname=$dbname user=$user password=$pass";
+
     $host = $dbopts["host"];
     $port = $dbopts["port"];
     $user = $dbopts["user"];
     $pass = $dbopts["pass"];
     $dbname = ltrim($dbopts["path"], '/'); // retire le / devant le nom de la DB
-
-    $conn_string = "host=$host port=$port dbname=$dbname user=$user password=$pass";
 
     $db = pg_connect($conn_string);
 
