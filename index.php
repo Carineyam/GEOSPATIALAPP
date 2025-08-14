@@ -479,6 +479,8 @@ th {
 }
 
 .map-container {
+  width: 100%;
+  height: 100%; /* ou une hauteur fixe, ex: 500px */
   flex: 1;
 }
 
