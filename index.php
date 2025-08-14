@@ -5,14 +5,6 @@ if (!$conn) {
     die("Erreur de connexion");
 }
 
-// Exemple simple
-$result = pg_query($conn, "SELECT * FROM golfe LIMIT 5;");
-$data = pg_fetch_all($result);
-
-echo "<pre>";
-print_r($data);
-echo "</pre>";
-
 pg_close($conn);
 
 
